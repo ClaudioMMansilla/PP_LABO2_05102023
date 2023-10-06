@@ -16,7 +16,10 @@ namespace Entidades
 
         public string Valor
         {
-            get { return this.valor; } 
+            get 
+            { 
+                return this.valor; 
+            } 
         }
 
         internal abstract double ValorNumerico

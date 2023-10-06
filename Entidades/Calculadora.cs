@@ -91,21 +91,75 @@ namespace Entidades
         }
 
         public Calculadora(string nombreAlumno)
-        { }
+            : this()
+        {
+            this.nombreAlumno = nombreAlumno;
+        }
 
         public void ActualizaHistorialDeOperaciones(char operador)
         { }
 
         public void EliminarHistorialDeOperaciones()
-        { }
+        { 
+            this.operaciones.Clear();
+        }
 
         private Numeracion MapeaResultado(double valor)
-        { }
+        {
+            Numeracion num;
+
+            if(Calculadora.sistema == ESistema.Decimal)
+            {
+                num = new SistemaDecimal(valor.ToString());
+            }
+            else if(Calculadora.sistema == ESistema.Binario)
+            {
+                num = new SistemaBinario(valor.ToString());
+            }
+            else
+            {
+                num = new SistemaDecimal(double.MinValue.ToString());
+            }
+
+            return num;
+        }
 
         public void Calcular()
-        { }
+        {
+            this.Calcular('+');
+        }
 
         public void Calcular(char operador)
-        { }
+        {
+            double primerOp = (double)this.primerOperando;
+            double segundoOp = (double)this.segundoOperando;
+            double resultadoAux;
+
+            if (this.primerOperando != this.segundoOperando)
+            {
+                resultadoAux = 0;
+            }
+
+            else 
+            {
+                switch (operador)
+                { // (+, -,*, /)
+                    case '-':
+                        resultadoAux = primerOp - segundoOp;
+                        break;
+                    case '*':
+                        resultadoAux = primerOp * segundoOp;
+                        break;
+                    case '/':
+                        resultadoAux = primerOp / segundoOp;
+                        break;
+                    default:
+                        resultadoAux = primerOp + segundoOp;
+                        break;
+                }
+            }
+
+            this.resultado = this.MapeaResultado(resultadoAux);
+        }
     }
 }
