@@ -97,7 +97,14 @@ namespace Entidades
         }
 
         public void ActualizaHistorialDeOperaciones(char operador)
-        { }
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"Sistema: {Calculadora.Sistema}");
+            sb.AppendLine($"Primer Op: {this.primerOperando.Valor}");
+            sb.AppendLine($"Segundo Op: {this.segundoOperando.Valor}");
+            sb.AppendLine($"Operador: {operador}");
+            operaciones.Add( sb.ToString() );
+        }
 
         public void EliminarHistorialDeOperaciones()
         { 
